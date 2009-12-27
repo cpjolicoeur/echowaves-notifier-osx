@@ -14,6 +14,7 @@
  */
 
 #import "EchowavesController.h"
+#import "JSON.h"
 #import "Echowaves.h"
 #import "UpdatedConvo.h"
 
@@ -56,11 +57,7 @@
 }
 
 - (IBAction)queryEchowavesServer:(id)sender {
-	NSLog(@"Inside #queryEchowavesServer");
-	
-	[echowaves getUpdates];
-	
-	NSLog(@"Leaving #queryEchowavesServer: %@", echowaves.updatedConvos);
+	[self getUpdates];
 }
 
 - (IBAction)updateApiKey:(id)sender {
@@ -72,6 +69,59 @@
 
 - (void)convoSelected:(id)sender {
 	// user clicked a convo from the menu
+}
+
+- (void)getUpdates {
+	// get updates from Echowaves.com here
+	echowaves.responseData = [[NSMutableData data] retain];
+	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:echowaves.echowavesURI]];
+	[[NSURLConnection alloc] initWithRequest:request delegate:self];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	[connection release];
+	NSString *responseString = [[NSString alloc] initWithData:echowaves.responseData encoding:NSUTF8StringEncoding];
+	[echowaves.responseData release];
+	
+	if ( [responseString isEqualToString:@"\"Unable to find specified resource.\""] ) {
+		NSLog(@"Unable to find specified resource.\n");
+	} else {
+		NSBundle *bundle = [NSBundle mainBundle];
+		[echowaves.updatedConvos removeAllObjects];
+		NSDictionary *dictionary = [responseString JSONValue];
+		if ( [dictionary count] ) {
+			//NSLog(@"returned dictionary data: %@", dictionary);
+			for (NSDictionary *subscription in dictionary ) {
+				UpdatedConvo *convo = [[UpdatedConvo alloc] initWithConvoName:[[subscription objectForKey:@"subscription"] objectForKey:@"convo_name"]
+																	 convoURI:[[subscription objectForKey:@"subscription"] objectForKey:@"@conversation_id"]
+																  unreadCount:[[[subscription objectForKey:@"subscription"] objectForKey:@"new_messages_count"] integerValue]];
+				
+				
+				[echowaves.updatedConvos addObject:convo];
+				[convo release];
+			}
+			[statusItem setImage:[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"ewColor" ofType:@"png"]]];
+		} else {
+			// * No new subscriptions
+			// * for now, just store the blank message
+			[echowaves.updatedConvos addObject:@"No new convo messages"];
+			[statusItem setImage:[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"ewBW" ofType:@"png"]]];
+		}
+	}
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+	[echowaves.responseData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	[echowaves.responseData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+	NSLog(@"Connection failed: %@", [error description]);
+	[echowaves.updatedConvos removeAllObjects];
+	[echowaves.updatedConvos addObject:@"Connection failure"];
 }
 
 - (void)dealloc {

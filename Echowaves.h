@@ -21,6 +21,4 @@
 @property (nonatomic, retain) NSMutableArray *updatedConvos;
 @property (nonatomic, retain) NSString *echowavesURI;
 
-- (void)getUpdates;
-
 @end
