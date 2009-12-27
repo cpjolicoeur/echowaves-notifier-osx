@@ -20,6 +20,7 @@
 		5278402910E6FF010004235A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5278402310E6FF010004235A /* SBJsonWriter.m */; };
 		5278402D10E6FF8F0004235A /* Echowaves.m in Sources */ = {isa = PBXBuildFile; fileRef = 5278402C10E6FF8F0004235A /* Echowaves.m */; };
 		5278417D10E7AFC00004235A /* UpdatedConvo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5278417C10E7AFC00004235A /* UpdatedConvo.m */; };
+		527841DF10E7EC450004235A /* ewColor.png in Resources */ = {isa = PBXBuildFile; fileRef = 527841DE10E7EC450004235A /* ewColor.png */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -57,6 +58,7 @@
 		5278402C10E6FF8F0004235A /* Echowaves.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Echowaves.m; sourceTree = "<group>"; };
 		5278417B10E7AFC00004235A /* UpdatedConvo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdatedConvo.h; sourceTree = "<group>"; };
 		5278417C10E7AFC00004235A /* UpdatedConvo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdatedConvo.m; sourceTree = "<group>"; };
+		527841DE10E7EC450004235A /* ewColor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ewColor.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* EchowavesNotifier-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "EchowavesNotifier-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* EchowavesNotifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EchowavesNotifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -139,6 +141,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				527841DE10E7EC450004235A /* ewColor.png */,
 				52783FDC10E6F65E0004235A /* ewHL.png */,
 				52783FDD10E6F65E0004235A /* ewBW.png */,
 				8D1107310486CEB800E47090 /* EchowavesNotifier-Info.plist */,
@@ -224,6 +227,7 @@
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
 				52783FDE10E6F65E0004235A /* ewHL.png in Resources */,
 				52783FDF10E6F65E0004235A /* ewBW.png in Resources */,
+				527841DF10E7EC450004235A /* ewColor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

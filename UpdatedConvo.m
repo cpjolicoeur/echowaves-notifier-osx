@@ -13,10 +13,10 @@
 
 @synthesize URI, name, newMessagesCount;
 
-- (id)initWithConvoName:(NSString *)convoName convoURI:(NSString *)convoURI unreadCount:(int)updatesCount; {
+- (id)initWithConvoName:(NSString *)convoName convoURI:(NSString *)ewURI unreadCount:(int)updatesCount; {
 	if ( self = [super init] ) {
 		// do custom stuff here
-		URI = convoURI;
+		URI = ewURI;
 		name = convoName;
 		newMessagesCount = updatesCount;
 	}

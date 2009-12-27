@@ -8,6 +8,7 @@
 
 #import "Echowaves.h"
 #import "JSON.h"
+#import "UpdatedConvo.h"
 
 
 @implementation Echowaves
@@ -33,41 +34,37 @@
 - (void)getUpdates {
 	// get updates from Echowaves.com here
 	responseData = [[NSMutableData data] retain];
-//	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://echowaves.com/conversations/new_messages.json?user_credentials=fR2Pf-OUah5Ec9QVVKp7"]];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:echowavesURI]];
 	[[NSURLConnection alloc] initWithRequest:request delegate:self];
-	NSLog(@"exiting Echowaves#getUpdates");
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	NSLog(@"GOT HERE: connectionDidFinishLoading");
 	[connection release];
-	
 	NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
 	[responseData release];
 	
 	if ( [responseString isEqualToString:@"\"Unable to find specified resource.\""] ) {
 		NSLog(@"Unable to find specified resource.\n");
 	} else {
+		[updatedConvos removeAllObjects];
 		NSDictionary *dictionary = [responseString JSONValue];
-		NSLog(@"returned dictionary data: %@", dictionary);
-		
-		// for now, just store the blank message
-		[updatedConvos addObject:@"No new convo messages"];
-		
-		
-		//self.someVariable = [dictionary valueForKey:@"somekey"];
-		/*
-		 We will be looking for 
-		 ['subscription']['new_messages_count'] and
-		 ['subscription']['convo_name']
-		 
-		 This is how Ruby's HTTParty references them.  Not sure our Obj-C's
-		 dictionary will reference them as object keys
-		 */
+		if ( [dictionary count] ) {
+			NSLog(@"returned dictionary data: %@", dictionary);
+			for (NSDictionary *subscription in dictionary ) {
+				UpdatedConvo *convo = [[UpdatedConvo alloc] initWithConvoName:[[subscription objectForKey:@"subscription"] objectForKey:@"convo_name"]
+																   convoURI:[[subscription objectForKey:@"subscription"] objectForKey:@"@conversation_id"]
+																unreadCount:[[[subscription objectForKey:@"subscription"] objectForKey:@"new_messages_count"] integerValue]];
+				
+				
+				[updatedConvos addObject:convo];
+				[convo release];
+			}
+		} else {
+			// * No new subscriptions
+			// * for now, just store the blank message
+			[updatedConvos addObject:@"No new convo messages"];
+		}
 	}
-	
-	NSLog(@"UpdatedConvos: %@", updatedConvos);
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -80,7 +77,8 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 	NSLog(@"Connection failed: %@", [error description]);
-	//label.text = [NSString stringWithFormat:@"Connection failed: %@", [error description]];
+	[updatedConvos removeAllObjects];
+	[updatedConvos addObject:@"Connection failure"];
 }
 
 - (void)dealloc {

@@ -30,7 +30,7 @@
 
 - (void)awakeFromNib {	
 	// Create the NSStatusBar and set its length
-	statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength] retain];
+	statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength: NSVariableStatusItemLength] retain];
 	
 	// Used to detect where our files are
 	NSBundle *bundle = [NSBundle mainBundle];
@@ -42,6 +42,10 @@
 	// Sets the images in our NSStatusItem
 	[statusItem setImage:ewImage];
 	[statusItem setAlternateImage:ewHighlightImage];
+	//[statusItem setTitle:@"Foobar"];
+	
+	[ewImage release];
+	[ewHighlightImage release];
 	
 	// Tells the NSStatusItem what menu to load
 	[statusItem setMenu:statusMenu];
@@ -49,16 +53,6 @@
 	[statusItem setToolTip:@"Echowaves Notifier"];
 	// Enables highlighting
 	[statusItem setHighlightMode:YES];
-}
-
-- (void)dealloc {
-	// Release the echowaves object
-	[echowaves release];
-	
-	// Release the 2 images we loaded into memory
-	[ewImage release];
-	[ewHighlightImage release];
-	[super dealloc];
 }
 
 - (IBAction)queryEchowavesServer:(id)sender {
@@ -78,6 +72,16 @@
 
 - (void)convoSelected:(id)sender {
 	// user clicked a convo from the menu
+}
+
+- (void)dealloc {
+	// Release the echowaves object
+	[echowaves release];
+	
+	// Release the 2 images we loaded into memory
+	[ewImage release];
+	[ewHighlightImage release];
+	[super dealloc];
 }
 
 @end
