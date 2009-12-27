@@ -11,21 +11,21 @@
 
 @implementation UpdatedConvo
 
-@synthesize URI, name, newMessagesCount;
+@synthesize ewURI, ewName, newMessagesCount;
 
-- (id)initWithConvoName:(NSString *)convoName convoURI:(NSString *)ewURI unreadCount:(int)updatesCount; {
+- (id)initWithConvoName:(NSString *)convoName convoURI:(NSString *)convoURI unreadCount:(int)updatesCount; {
 	if ( self = [super init] ) {
 		// do custom stuff here
-		URI = ewURI;
-		name = convoName;
+		ewURI = convoURI;
+		ewName = convoName;
 		newMessagesCount = updatesCount;
 	}
 	return self;
 }
 
 - (void)dealloc {
-	[URI release];
-	[name release];
+	[ewURI release];
+	[ewName release];
 	[super dealloc];
 }
 

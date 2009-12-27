@@ -10,14 +10,14 @@
 
 
 @interface UpdatedConvo : NSObject {
-	NSString *convoURI;
-	NSString *name;
+	NSString *ewURI;
+	NSString *ewName;
 	int newMessagesCount;
 }
 
 @property int newMessagesCount;
-@property (nonatomic, retain) NSString *URI;
-@property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSString *ewURI;
+@property (nonatomic, retain) NSString *ewName;
 
 - (id)initWithConvoName:(NSString *)convoName convoURI:(NSString *)convoURI unreadCount:(int)updatesCount;
 

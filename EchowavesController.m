@@ -65,6 +65,25 @@
 	// 2. Store users API key into the defaults and Echowaves object
 	NSLog(@"Inside #updateApiKey");
 	[NSApp activateIgnoringOtherApps:YES];
+	
+	[statusMenu setAutoenablesItems:NO];
+	NSArray *itemArray = [statusMenu itemArray];
+	for (NSMenuItem *item in itemArray) {
+		NSLog(@"Menu item: %@", item);
+		if ([item isSeparatorItem]) {
+			NSLog(@"Item is separator");
+			NSLog(@"Item index: %d", [statusMenu indexOfItem:item]);
+			break;  // The first separator item marks the end of the item updates
+		}
+	}
+	[statusMenu insertItemWithTitle:@"MMA HQ" action:@selector(openEchowavesURL:) keyEquivalent:@"" atIndex:0];
+}
+
+- (void)openEchowavesURL:(id)sender {
+	NSLog(@"Inside #openEchowavesURL");
+	NSURL *loadUrl = [NSURL URLWithString:@"http://www.mmahq.com"];
+	[[NSWorkspace sharedWorkspace] openURL:loadUrl];
+	[loadUrl release];
 }
 
 - (void)convoSelected:(id)sender {

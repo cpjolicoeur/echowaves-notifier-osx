@@ -27,5 +27,6 @@
 - (IBAction)updateApiKey:(id)sender;
 - (void)convoSelected:(id)sender;
 - (void)getUpdates;
+- (void)openEchowavesURL:(id)sender;
 
 @end
