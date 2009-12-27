@@ -1,0 +1,14 @@
+# XCode noise
+build/*
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.swp
+*~.nib
+*.perspective
+*.perspective3
+
+.svn
+
+.DS_Store
+profile
