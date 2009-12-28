@@ -9,8 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "Echowaves.h"
 
-//#define _userApiKey [[NSUserDefaults standardUserDefaults] stringForKey:@"userApiKey"];
-#define _echowavesURI @"https://echowaves.com/conversations/new_messages.json?user_credentials="
+#define _userApiKey [[NSUserDefaults standardUserDefaults] stringForKey:@"userApiKey"]
 #define _convoBaseURI @"http://echowaves.com/conversations/"
 
 @interface EchowavesController : NSObject {

@@ -15,17 +15,14 @@
 
 - (id)init {
 	if ( self = [super init] ) {
-		// do custom stuff here
-		
 		updatedConvos = [[NSMutableArray array] retain];
-		
-		// https://echowaves.com/conversations/new_messages.json?user_credentials=fR2Pf-OUah5Ec9QVVKp7
-		NSString *apiKey = @"fR2Pf-OUah5Ec9QVVKp7";
-		NSString *baseURI = @"https://echowaves.com/conversations/new_messages.json?user_credentials=";
-		echowavesURI = [[baseURI stringByAppendingString:apiKey] retain];
-		NSLog(@"Allocating Echowaves object with URI: %@", echowavesURI);
 	}
 	return self;
+}
+
+- (void)setEchowavesURI:(NSString *)apiKey {
+	echowavesURI = [[_echowavesBaseURI stringByAppendingString:apiKey] retain];
+	NSLog(@"Setting echowavesURI: %@", echowavesURI);
 }
 
 - (void)dealloc {

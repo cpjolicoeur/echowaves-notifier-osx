@@ -8,9 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 
+#define _echowavesBaseURI @"https://echowaves.com/conversations/new_messages.json?user_credentials="
 
 @interface Echowaves : NSObject {
-//	NSString *apiKey;
 	NSString *echowavesURI;
 	NSMutableData *responseData;
 	NSMutableArray *updatedConvos;

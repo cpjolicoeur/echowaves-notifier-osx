@@ -30,6 +30,8 @@
 }
 
 - (void)awakeFromNib {	
+	[statusMenu setAutoenablesItems:NO];
+
 	// Create the NSStatusBar and set its length
 	statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength: NSVariableStatusItemLength] retain];
 	
@@ -54,6 +56,23 @@
 	[statusItem setToolTip:@"Echowaves Notifier"];
 	// Enables highlighting
 	[statusItem setHighlightMode:YES];
+	
+	// If API KEY is set, start timer
+	// If no API KEY, then disable menu items except for updating API KEY and 
+	//   pop open the input API Key box
+	if ( _userApiKey ) {
+		NSLog(@"_userApiKey found: %@", _userApiKey);
+		[echowaves setEchowavesURI:_userApiKey];
+	} else {
+		// no user API Key set in the defaults yet
+		NSLog(@"No _userApiKey set");
+		NSMenuItem *manualUpdateItem = [statusMenu itemWithTitle:@"Manually Check for Updates"];
+		[manualUpdateItem setEnabled:NO];
+		
+		// fudge API KEY creation for now
+		NSString *apiKey = [NSString stringWithString:@"fR2Pf-OUah5Ec9QVVKp7"];
+		[[NSUserDefaults standardUserDefaults] setObject:apiKey forKey:@"userApiKey"];
+	}
 }
 
 - (IBAction)queryEchowavesServer:(id)sender {
@@ -68,14 +87,11 @@
 }
 
 - (void)reloadMenuItems {
-	// reload the menu data here based on the contents of echowaves.updatedConvos
-
 	[statusMenu setAutoenablesItems:NO];
-	NSArray *itemArray = [statusMenu itemArray];
-	
+
 	// remove all menu items until the first separator is reached
+	NSArray *itemArray = [statusMenu itemArray];
 	for (NSMenuItem *item in itemArray) {
-		//NSLog(@"Menu item: %@", item);
 		if ([item isSeparatorItem]) {
 			break;  // The first separator item marks the end of the item updates
 		}
@@ -103,14 +119,18 @@
 }
 
 - (void)convoSelected:(id)sender {
-	NSLog(@"Convo selected from menu: %@", sender);
 	id convo_id = [sender representedObject];
-	
 	NSURL *loadUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", _convoBaseURI, convo_id]];
 	[self openEchowavesURL:loadUrl];
 }
 
 - (void)getUpdates {
+	// NO OP if no API KEY set
+	if ( !_userApiKey ) {
+		NSLog(@"No _userApiKey set.  Aborting getUpdates process");
+		return;
+	}
+	
 	echowaves.responseData = [[NSMutableData data] retain];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:echowaves.echowavesURI]];
 	[[NSURLConnection alloc] initWithRequest:request delegate:self];
