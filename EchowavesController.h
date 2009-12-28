@@ -11,6 +11,7 @@
 
 //#define _userApiKey [[NSUserDefaults standardUserDefaults] stringForKey:@"userApiKey"];
 #define _echowavesURI @"https://echowaves.com/conversations/new_messages.json?user_credentials="
+#define _convoBaseURI @"http://echowaves.com/conversations/"
 
 @interface EchowavesController : NSObject {
 	Echowaves *echowaves;
@@ -27,6 +28,7 @@
 - (IBAction)updateApiKey:(id)sender;
 - (void)convoSelected:(id)sender;
 - (void)getUpdates;
-- (void)openEchowavesURL:(id)sender;
+- (void)openEchowavesURL:(NSURL *)urlToOpen;
+- (void)reloadMenuItems;
 
 @end

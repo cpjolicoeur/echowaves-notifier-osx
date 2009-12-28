@@ -23,6 +23,10 @@
 	return self;
 }
 
+- (NSString *)description {
+	return [NSString stringWithFormat:@"Convo: %@, URL: %@, messages count: %d", ewName, ewURI, newMessagesCount];
+}
+
 - (void)dealloc {
 	[ewURI release];
 	[ewName release];

@@ -65,33 +65,52 @@
 	// 2. Store users API key into the defaults and Echowaves object
 	NSLog(@"Inside #updateApiKey");
 	[NSApp activateIgnoringOtherApps:YES];
-	
-	[statusMenu setAutoenablesItems:NO];
-	NSArray *itemArray = [statusMenu itemArray];
-	for (NSMenuItem *item in itemArray) {
-		NSLog(@"Menu item: %@", item);
-		if ([item isSeparatorItem]) {
-			NSLog(@"Item is separator");
-			NSLog(@"Item index: %d", [statusMenu indexOfItem:item]);
-			break;  // The first separator item marks the end of the item updates
-		}
-	}
-	[statusMenu insertItemWithTitle:@"MMA HQ" action:@selector(openEchowavesURL:) keyEquivalent:@"" atIndex:0];
 }
 
-- (void)openEchowavesURL:(id)sender {
-	NSLog(@"Inside #openEchowavesURL");
-	NSURL *loadUrl = [NSURL URLWithString:@"http://www.mmahq.com"];
-	[[NSWorkspace sharedWorkspace] openURL:loadUrl];
-	[loadUrl release];
+- (void)reloadMenuItems {
+	// reload the menu data here based on the contents of echowaves.updatedConvos
+
+	[statusMenu setAutoenablesItems:NO];
+	NSArray *itemArray = [statusMenu itemArray];
+	
+	// remove all menu items until the first separator is reached
+	for (NSMenuItem *item in itemArray) {
+		//NSLog(@"Menu item: %@", item);
+		if ([item isSeparatorItem]) {
+			break;  // The first separator item marks the end of the item updates
+		}
+		[statusMenu removeItem:item];
+	}
+
+	if ( [[echowaves.updatedConvos objectAtIndex:0] isKindOfClass:[NSString class]] ) {
+		// no convo updates
+		NSMenuItem *newItem = [statusMenu insertItemWithTitle:@"No new convo messages" action:NULL keyEquivalent:@"" atIndex:0];
+		[newItem setEnabled:NO];
+	} else {
+		// real convo updates
+		for (UpdatedConvo *convo in echowaves.updatedConvos) {
+			// TODO: need to truncate convo name string if it is longer than 25? chars
+			NSMenuItem *newItem = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%d - %@", convo.newMessagesCount, convo.ewName] action:@selector(convoSelected:) keyEquivalent:@"" atIndex:0];
+			[newItem setTarget:self];
+			[newItem setRepresentedObject:convo.ewURI];
+		}
+	}
+}
+
+- (void)openEchowavesURL:(NSURL *)urlToOpen {
+	NSLog(@"Opening URL in browser: %@", urlToOpen);
+	[[NSWorkspace sharedWorkspace] openURL:urlToOpen];
 }
 
 - (void)convoSelected:(id)sender {
-	// user clicked a convo from the menu
+	NSLog(@"Convo selected from menu: %@", sender);
+	id convo_id = [sender representedObject];
+	
+	NSURL *loadUrl = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", _convoBaseURI, convo_id]];
+	[self openEchowavesURL:loadUrl];
 }
 
 - (void)getUpdates {
-	// get updates from Echowaves.com here
 	echowaves.responseData = [[NSMutableData data] retain];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:echowaves.echowavesURI]];
 	[[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -112,11 +131,12 @@
 			//NSLog(@"returned dictionary data: %@", dictionary);
 			for (NSDictionary *subscription in dictionary ) {
 				UpdatedConvo *convo = [[UpdatedConvo alloc] initWithConvoName:[[subscription objectForKey:@"subscription"] objectForKey:@"convo_name"]
-																	 convoURI:[[subscription objectForKey:@"subscription"] objectForKey:@"@conversation_id"]
+																	 convoURI:[[subscription objectForKey:@"subscription"] objectForKey:@"conversation_id"]
 																  unreadCount:[[[subscription objectForKey:@"subscription"] objectForKey:@"new_messages_count"] integerValue]];
 				
 				
 				[echowaves.updatedConvos addObject:convo];
+				NSLog(@"Added convo: %@", convo);
 				[convo release];
 			}
 			[statusItem setImage:[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"ewColor" ofType:@"png"]]];
@@ -127,6 +147,7 @@
 			[statusItem setImage:[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"ewBW" ofType:@"png"]]];
 		}
 	}
+	[self reloadMenuItems];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
