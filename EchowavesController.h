@@ -12,9 +12,13 @@
 #define _userApiKey [[NSUserDefaults standardUserDefaults] stringForKey:@"userApiKey"]
 #define _convoBaseURI @"http://echowaves.com/conversations/"
 
+@class ApiKeyController;
+
 @interface EchowavesController : NSObject {
 	Echowaves *echowaves;
 	NSUserDefaults *userDefaults;
+	
+	ApiKeyController *apiWindow;
 	
 	IBOutlet NSMenu *statusMenu;
 	

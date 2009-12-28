@@ -17,6 +17,7 @@
 #import "JSON.h"
 #import "Echowaves.h"
 #import "UpdatedConvo.h"
+#import "ApiKeyController.h"
 
 @implementation EchowavesController
 
@@ -57,21 +58,23 @@
 	// Enables highlighting
 	[statusItem setHighlightMode:YES];
 	
+	// setup ApiKey window stuff
+	apiWindow = [[ApiKeyController alloc] init];
+	//[apiWindow window];
+	
 	// If API KEY is set, start timer
 	// If no API KEY, then disable menu items except for updating API KEY and 
 	//   pop open the input API Key box
 	if ( _userApiKey ) {
 		NSLog(@"_userApiKey found: %@", _userApiKey);
 		[echowaves setEchowavesURI:_userApiKey];
+		[self getUpdates];
 	} else {
 		// no user API Key set in the defaults yet
 		NSLog(@"No _userApiKey set");
 		NSMenuItem *manualUpdateItem = [statusMenu itemWithTitle:@"Manually Check for Updates"];
 		[manualUpdateItem setEnabled:NO];
-		
-		// fudge API KEY creation for now
-		NSString *apiKey = [NSString stringWithString:@"fR2Pf-OUah5Ec9QVVKp7"];
-		[[NSUserDefaults standardUserDefaults] setObject:apiKey forKey:@"userApiKey"];
+		[apiWindow showWindow:self];
 	}
 }
 
@@ -82,8 +85,8 @@
 - (IBAction)updateApiKey:(id)sender {
 	// 1. Pop window to enter API Key
 	// 2. Store users API key into the defaults and Echowaves object
-	NSLog(@"Inside #updateApiKey");
 	[NSApp activateIgnoringOtherApps:YES];
+	[apiWindow showWindow:self];
 }
 
 - (void)reloadMenuItems {
@@ -185,8 +188,8 @@
 }
 
 - (void)dealloc {
-	// Release the echowaves object
 	[echowaves release];
+	[apiWindow release];
 	
 	// Release the 2 images we loaded into memory
 	[ewImage release];
