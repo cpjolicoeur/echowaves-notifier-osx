@@ -318,6 +318,7 @@
 				INFOPLIST_FILE = "EchowavesNotifier-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = EchowavesNotifier;
+				SDKROOT = macosx10.5;
 			};
 			name = Release;
 		};
