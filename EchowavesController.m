@@ -62,13 +62,11 @@
 	apiWindow = [[ApiKeyController alloc] init];
 	//[apiWindow window];
 	
-	// If API KEY is set, start timer
-	// If no API KEY, then disable menu items except for updating API KEY and 
-	//   pop open the input API Key box
 	if ( _userApiKey ) {
 		NSLog(@"_userApiKey found: %@", _userApiKey);
 		[echowaves setEchowavesURI:_userApiKey];
 		[self getUpdates];
+		// set timer for next update
 	} else {
 		// no user API Key set in the defaults yet
 		NSLog(@"No _userApiKey set");
@@ -113,6 +111,7 @@
 			[newItem setTarget:self];
 			[newItem setRepresentedObject:convo.ewURI];
 		}
+		[statusItem setTitle:[NSString stringWithFormat:@"%d", [echowaves.updatedConvos count]]];
 	}
 }
 

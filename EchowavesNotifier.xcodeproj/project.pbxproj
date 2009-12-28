@@ -10,6 +10,7 @@
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		5267371510E93E13005E133C /* ApiKeyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5267371410E93E13005E133C /* ApiKeyController.m */; };
 		5267372A10E93FA5005E133C /* ApiKey.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5267372910E93FA5005E133C /* ApiKey.xib */; };
+		5267380410E95849005E133C /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 5267380310E95849005E133C /* TODO */; };
 		52783FDB10E6ED030004235A /* EchowavesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52783FDA10E6ED030004235A /* EchowavesController.m */; };
 		52783FDE10E6F65E0004235A /* ewHL.png in Resources */ = {isa = PBXBuildFile; fileRef = 52783FDC10E6F65E0004235A /* ewHL.png */; };
 		52783FDF10E6F65E0004235A /* ewBW.png in Resources */ = {isa = PBXBuildFile; fileRef = 52783FDD10E6F65E0004235A /* ewBW.png */; };
@@ -39,6 +40,7 @@
 		5267371310E93E13005E133C /* ApiKeyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiKeyController.h; sourceTree = "<group>"; };
 		5267371410E93E13005E133C /* ApiKeyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiKeyController.m; sourceTree = "<group>"; };
 		5267372910E93FA5005E133C /* ApiKey.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ApiKey.xib; sourceTree = "<group>"; };
+		5267380310E95849005E133C /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		52783FD910E6ED030004235A /* EchowavesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EchowavesController.h; sourceTree = "<group>"; };
 		52783FDA10E6ED030004235A /* EchowavesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EchowavesController.m; sourceTree = "<group>"; };
 		52783FDC10E6F65E0004235A /* ewHL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ewHL.png; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 				5267372910E93FA5005E133C /* ApiKey.xib */,
+				5267380310E95849005E133C /* TODO */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				52783FDF10E6F65E0004235A /* ewBW.png in Resources */,
 				527841DF10E7EC450004235A /* ewColor.png in Resources */,
 				5267372A10E93FA5005E133C /* ApiKey.xib in Resources */,
+				5267380410E95849005E133C /* TODO in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,4 @@
+* add growl support
+* add sparkle support for updating app
+* add preferences for setting update interval
+* truncate convo names in the menu list

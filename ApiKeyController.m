@@ -34,6 +34,7 @@
 	} else {
 		[[NSUserDefaults standardUserDefaults] setObject:apiKey forKey:@"userApiKey"];
 		NSLog(@"Updated _userApiKey with: %@", apiKey);
+		// TODO: need to call the getUpdates method from EchowavesController here as well
 	}
 	[self close];
 }
