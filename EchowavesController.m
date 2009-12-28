@@ -21,11 +21,15 @@
 
 @implementation EchowavesController
 
+@synthesize updateTimer, delegate;
+
 - (id)init {
 	if (self = [super init]) {
 		// Create the echowaves objects
 		echowaves = [[Echowaves alloc] init];
 		userDefaults = [NSUserDefaults standardUserDefaults];
+		updateTimer = [NSTimer timerWithTimeInterval:_updateInterval target:self selector:@selector(getUpdates) userInfo:nil repeats:YES];
+		//[[NSRunLoop currentRunLoop] addTimer:updateTimer forMode:NSRunLoopCommonModes];
 	}
 	return self;
 }
@@ -127,13 +131,14 @@
 }
 
 - (void)getUpdates {
+	NSLog(@"Inside getUpdates");
 	// NO OP if no API KEY set
 	if ( !_userApiKey ) {
 		NSLog(@"No _userApiKey set.  Aborting getUpdates process");
 		return;
 	}
 	
-	echowaves.responseData = [[NSMutableData data] retain];
+	//echowaves.responseData = [[NSMutableData data] retain];
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:echowaves.echowavesURI]];
 	[[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
@@ -189,6 +194,11 @@
 - (void)dealloc {
 	[echowaves release];
 	[apiWindow release];
+	
+	if (updateTimer != nil) {
+		[updateTimer invalidate];
+		updateTimer = nil;
+	}
 	
 	// Release the 2 images we loaded into memory
 	[ewImage release];

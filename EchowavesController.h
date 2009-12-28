@@ -11,14 +11,16 @@
 
 #define _userApiKey [[NSUserDefaults standardUserDefaults] stringForKey:@"userApiKey"]
 #define _convoBaseURI @"http://echowaves.com/conversations/"
+#define _updateInterval 10
 
 @class ApiKeyController;
 
 @interface EchowavesController : NSObject {
 	Echowaves *echowaves;
-	NSUserDefaults *userDefaults;
-	
 	ApiKeyController *apiWindow;
+	id delegate;
+	NSUserDefaults *userDefaults;
+	NSTimer *updateTimer;
 	
 	IBOutlet NSMenu *statusMenu;
 	
@@ -26,6 +28,9 @@
 	NSImage	*ewImage;
 	NSImage *ewHighlightImage;
 }
+
+@property (nonatomic, retain) NSTimer *updateTimer;
+@property (nonatomic, retain) id delegate;
 
 - (IBAction)queryEchowavesServer:(id)sender;
 - (IBAction)updateApiKey:(id)sender;

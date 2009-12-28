@@ -16,6 +16,7 @@
 - (id)init {
 	if ( self = [super init] ) {
 		updatedConvos = [[NSMutableArray array] retain];
+		responseData = [[NSMutableData data] retain];
 	}
 	return self;
 }
