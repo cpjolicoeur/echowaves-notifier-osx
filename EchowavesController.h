@@ -40,5 +40,7 @@
 - (void)enableManualUpdateMenuItem:(BOOL)enabled;
 - (void)resetUpdatedConvos;
 - (void)updateStatusbarImage:(NSString *)imagePathName;
+- (void)updateStatusbarImage:(NSString *)imagePathName withCount:(int)count;
+- (void)startTimer;
 
 @end

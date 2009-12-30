@@ -1,8 +1,4 @@
-* use KVO for noticing when api_key changes
-	* this means that api_key needs to be instance of Echowaves class
-	* not just a #define macro
-
-* set updates to run on timer
+* clean up (potential) memory leak with added convos to updatedConvos
 
 * add submenu if more than 5 convos added to menu
 	* convo 1

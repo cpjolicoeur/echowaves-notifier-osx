@@ -26,10 +26,14 @@
 - (id)init {
 	if (self = [super init]) {
 		echowaves = [[Echowaves alloc] init];
-		updateTimer = [NSTimer timerWithTimeInterval:_updateInterval target:self selector:@selector(getUpdates) userInfo:nil repeats:YES];
-		[[NSRunLoop currentRunLoop] addTimer:updateTimer forMode:NSRunLoopCommonModes];
+		[self startTimer];
 	}
 	return self;
+}
+
+- (void)startTimer {
+	updateTimer = [NSTimer timerWithTimeInterval:_updateInterval target:self selector:@selector(getUpdates) userInfo:nil repeats:YES];
+	[[NSRunLoop currentRunLoop] addTimer:updateTimer forMode:NSRunLoopCommonModes];
 }
 
 - (void)awakeFromNib {	
@@ -48,7 +52,6 @@
 	// Sets the images in our NSStatusItem
 	[statusItem setImage:ewImage];
 	[statusItem setAlternateImage:ewHighlightImage];
-	//[statusItem setTitle:@"Foobar"];
 	
 	[ewImage release];
 	[ewHighlightImage release];
@@ -104,9 +107,14 @@
 			[echowaves setEchowavesURI:newApiKey];
 			[self enableManualUpdateMenuItem:YES];
 			[self getUpdates];
+			// restart timer
+			//if ( ![updateTimer isValid] ) [self startTimer];
 		} else {
 			[self resetUpdatedConvos];
 			[self enableManualUpdateMenuItem:NO];
+			[self updateStatusbarImage:@"ewBW" withCount:0];
+			// stop timer
+			//[updateTimer invalidate];
 		}
 	}
 }
@@ -241,6 +249,17 @@
 - (void)updateStatusbarImage:(NSString *)imagePathName {
 	NSBundle *bundle = [NSBundle mainBundle];
 	[statusItem setImage:[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:imagePathName ofType:@"png"]]];
+}
+
+- (void)updateStatusbarImage:(NSString *)imagePathName withCount:(int)count {
+	NSBundle *bundle = [NSBundle mainBundle];
+	[statusItem setImage:[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:imagePathName ofType:@"png"]]];
+	
+	if (count == 0) {
+		[statusItem setTitle:@""];
+	} else {
+		[statusItem setTitle:[NSString stringWithFormat:@"%d", count]];
+	}
 }
 
 - (void)dealloc {
