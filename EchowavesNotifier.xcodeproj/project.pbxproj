@@ -12,6 +12,8 @@
 		5267372A10E93FA5005E133C /* ApiKey.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5267372910E93FA5005E133C /* ApiKey.xib */; };
 		5267380410E95849005E133C /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 5267380310E95849005E133C /* TODO */; };
 		52673B2C10EBE391005E133C /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 52673B2B10EBE391005E133C /* icon.icns */; };
+		52673B4F10EC02EE005E133C /* GrowlNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 52673B4E10EC02EE005E133C /* GrowlNotifier.m */; };
+		52673B5110EC05B2005E133C /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52673B5010EC05B2005E133C /* Growl.framework */; };
 		52783FDB10E6ED030004235A /* EchowavesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52783FDA10E6ED030004235A /* EchowavesController.m */; };
 		52783FDE10E6F65E0004235A /* ewHL.png in Resources */ = {isa = PBXBuildFile; fileRef = 52783FDC10E6F65E0004235A /* ewHL.png */; };
 		52783FDF10E6F65E0004235A /* ewBW.png in Resources */ = {isa = PBXBuildFile; fileRef = 52783FDD10E6F65E0004235A /* ewBW.png */; };
@@ -29,6 +31,18 @@
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		52673B7810EC060D005E133C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "src/echowaves-notifier-osx/Growl.framework";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -43,6 +57,9 @@
 		5267372910E93FA5005E133C /* ApiKey.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ApiKey.xib; sourceTree = "<group>"; };
 		5267380310E95849005E133C /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		52673B2B10EBE391005E133C /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = "/Users/cpjolicoeur/Downloads/Echowaves Logos/icon.icns"; sourceTree = "<absolute>"; };
+		52673B4D10EC02EE005E133C /* GrowlNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowlNotifier.h; sourceTree = "<group>"; };
+		52673B4E10EC02EE005E133C /* GrowlNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowlNotifier.m; sourceTree = "<group>"; };
+		52673B5010EC05B2005E133C /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		52783FD910E6ED030004235A /* EchowavesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EchowavesController.h; sourceTree = "<group>"; };
 		52783FDA10E6ED030004235A /* EchowavesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EchowavesController.m; sourceTree = "<group>"; };
 		52783FDC10E6F65E0004235A /* ewHL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ewHL.png; sourceTree = "<group>"; };
@@ -75,6 +92,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				52673B5110EC05B2005E133C /* Growl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +106,8 @@
 				5278402C10E6FF8F0004235A /* Echowaves.m */,
 				5278417B10E7AFC00004235A /* UpdatedConvo.h */,
 				5278417C10E7AFC00004235A /* UpdatedConvo.m */,
+				52673B4D10EC02EE005E133C /* GrowlNotifier.h */,
+				52673B4E10EC02EE005E133C /* GrowlNotifier.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -160,6 +180,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				52673B5010EC05B2005E133C /* Growl.framework */,
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
@@ -207,6 +228,7 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
+				52673B7810EC060D005E133C /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -269,6 +291,7 @@
 				5278402D10E6FF8F0004235A /* Echowaves.m in Sources */,
 				5278417D10E7AFC00004235A /* UpdatedConvo.m in Sources */,
 				5267371510E93E13005E133C /* ApiKeyController.m in Sources */,
+				52673B4F10EC02EE005E133C /* GrowlNotifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +323,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_ENABLE_OBJC_GC = unsupported;
@@ -320,6 +347,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = EchowavesNotifier_Prefix.pch;

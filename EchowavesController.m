@@ -18,6 +18,7 @@
 #import "Echowaves.h"
 #import "UpdatedConvo.h"
 #import "ApiKeyController.h"
+#import "GrowlNotifier.h"
 
 @implementation EchowavesController
 
@@ -62,6 +63,9 @@
 	[statusItem setToolTip:@"Echowaves Notifier"];
 	// Enables highlighting
 	[statusItem setHighlightMode:YES];
+	
+	// Set up growl notifier
+	growl = [[[GrowlNotifier alloc] init] retain];
 	
 	// setup ApiKey window stuff
 	apiWindow = [[ApiKeyController alloc] init];
@@ -261,6 +265,7 @@
 - (void)dealloc {
 	[echowaves release];
 	[apiWindow release];
+	[growl release];
 	
 	if (updateTimer != nil) {
 		[updateTimer invalidate];

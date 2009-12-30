@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Echowaves.h"
+#import "GrowlNotifier.h"
 
 #define _userApiKey [[NSUserDefaults standardUserDefaults] stringForKey:@"userApiKey"]
 #define _convoBaseURI @"http://echowaves.com/conversations/"
@@ -19,6 +20,7 @@
 @interface EchowavesController : NSObject {
 	Echowaves *echowaves;
 	ApiKeyController *apiWindow;
+	GrowlNotifier *growl;
 
 	IBOutlet NSMenu *statusMenu;
 	
