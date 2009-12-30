@@ -154,6 +154,7 @@
 		// no convo updates
 		NSMenuItem *newItem = [statusMenu insertItemWithTitle:_noNewConvosMessage action:NULL keyEquivalent:@"" atIndex:0];
 		[newItem setEnabled:NO];
+		[self updateStatusbarImage:@"ewBW" withCount:0];
 	} else {
 		// real convo updates
 		for (UpdatedConvo *convo in echowaves.updatedConvos) {
@@ -162,7 +163,7 @@
 			[newItem setTarget:self];
 			[newItem setRepresentedObject:convo.ewURI];
 		}
-		[statusItem setTitle:[NSString stringWithFormat:@"%d", [echowaves.updatedConvos count]]];
+		[self updateStatusbarImage:@"ewColor" withCount:[echowaves.updatedConvos count]];
 	}
 }
 
@@ -216,7 +217,6 @@
 				 */
 				//[convo release];
 			}
-			[self updateStatusbarImage:@"ewColor"];
 		} else {
 			// * No new subscriptions
 			// * for now, just store the blank message
@@ -225,7 +225,6 @@
 //			[noNewConvos release];
 			
 			[[echowaves updatedConvos] addObject:_noNewConvosMessage];
-			[self updateStatusbarImage:@"ewBW"];
 		}
 	}
 	[self reloadMenuItems];

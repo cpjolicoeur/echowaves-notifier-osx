@@ -11,6 +11,9 @@
 
 * make Ctrl-V, Ctrl-X, Ctrl-C work in apiKey window
 
+* when a convo is clicked via the menu (and subsequently opened in a browser)
+  remove it from the menu
+
 * add growl support
 * add sparkle support for updating app
 * add preferences for setting update interval
