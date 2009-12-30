@@ -15,7 +15,6 @@
 
 - (id)initWithConvoName:(NSString *)convoName convoURI:(NSString *)convoURI unreadCount:(int)updatesCount; {
 	if ( self = [super init] ) {
-		// do custom stuff here
 		ewURI = convoURI;
 		ewName = convoName;
 		newMessagesCount = updatesCount;

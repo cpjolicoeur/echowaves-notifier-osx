@@ -19,6 +19,8 @@
 
 @property (nonatomic, retain) NSMutableData *responseData;
 @property (nonatomic, retain) NSMutableArray *updatedConvos;
-@property (nonatomic, retain) NSString *echowavesURI;
+@property (nonatomic, copy) NSString *echowavesURI;
+
+- (void)resetUpdatedConvos;
 
 @end

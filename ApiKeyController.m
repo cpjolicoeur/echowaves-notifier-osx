@@ -24,17 +24,14 @@
 	}
 }
 
-
 - (IBAction)updateApiKey:(id)sender {
 	NSString *apiKey = [userApiKey stringValue];
 	if ( [apiKey length] == 0 ) {
 		[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"userApiKey"];
 		NSLog(@"User entered zero length API Key. Skipping update and removing userApiKey NSUserDefault");
-		// TODO: disable manual update menu item
 	} else {
 		[[NSUserDefaults standardUserDefaults] setObject:apiKey forKey:@"userApiKey"];
 		NSLog(@"Updated _userApiKey with: %@", apiKey);
-		// TODO: need to call the getUpdates method from EchowavesController here as well
 	}
 	[self close];
 }

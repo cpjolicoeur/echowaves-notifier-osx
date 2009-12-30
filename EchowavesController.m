@@ -21,15 +21,13 @@
 
 @implementation EchowavesController
 
-@synthesize updateTimer, delegate;
+@synthesize updateTimer;
 
 - (id)init {
 	if (self = [super init]) {
-		// Create the echowaves objects
 		echowaves = [[Echowaves alloc] init];
-		userDefaults = [NSUserDefaults standardUserDefaults];
 		updateTimer = [NSTimer timerWithTimeInterval:_updateInterval target:self selector:@selector(getUpdates) userInfo:nil repeats:YES];
-		//[[NSRunLoop currentRunLoop] addTimer:updateTimer forMode:NSRunLoopCommonModes];
+		[[NSRunLoop currentRunLoop] addTimer:updateTimer forMode:NSRunLoopCommonModes];
 	}
 	return self;
 }
@@ -70,16 +68,57 @@
 		NSLog(@"_userApiKey found: %@", _userApiKey);
 		[echowaves setEchowavesURI:_userApiKey];
 		[self getUpdates];
-		// set timer for next update
+		// TODO: set timer for next update
 	} else {
 		// no user API Key set in the defaults yet
 		NSLog(@"No _userApiKey set");
-		NSMenuItem *manualUpdateItem = [statusMenu itemWithTitle:@"Manually Check for Updates"];
-		[manualUpdateItem setEnabled:NO];
+		[self enableManualUpdateMenuItem:NO];
 		[apiWindow showWindow:self];
+		// TODO: disable timer
+	}
+	
+	// add KVO observer for userApiKey
+	[self observeUserDefault:@"userApiKey"];
+}
+
+- (void)enableManualUpdateMenuItem:(BOOL)enabled {
+	NSMenuItem *manualUpdateItem = [statusMenu itemWithTitle:@"Manually Check for Updates"];
+	[manualUpdateItem setEnabled:enabled];
+}
+
+- (void)observeUserDefault:(NSString *)property {
+	[[NSUserDefaults standardUserDefaults] addObserver:self
+											forKeyPath:property 
+											   options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
+											   context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+	// do observing here
+	NSString *newApiKey = [change objectForKey:NSKeyValueChangeNewKey];
+	NSString *oldApiKey = [change objectForKey:NSKeyValueChangeOldKey];
+	
+	if ( newApiKey != oldApiKey ) {
+		NSLog(@"userApiKey changed. old: %@, new: %@", oldApiKey, newApiKey);
+		if ( newApiKey != [NSNull null] ) {
+			[echowaves setEchowavesURI:newApiKey];
+			[self enableManualUpdateMenuItem:YES];
+			[self getUpdates];
+		} else {
+			[self resetUpdatedConvos];
+			[self enableManualUpdateMenuItem:NO];
+		}
 	}
 }
 
+- (void)resetUpdatedConvos {
+	[echowaves resetUpdatedConvos];
+	[echowaves.updatedConvos addObject:_noNewConvosMessage];
+	[self reloadMenuItems];
+	[self updateStatusbarImage:@"ewBW"];
+}
+
+	 
 - (IBAction)queryEchowavesServer:(id)sender {
 	[self getUpdates];
 }
@@ -103,9 +142,9 @@
 		[statusMenu removeItem:item];
 	}
 
-	if ( [[echowaves.updatedConvos objectAtIndex:0] isKindOfClass:[NSString class]] ) {
+	if ( ([echowaves.updatedConvos count] == 0 ) || [[echowaves.updatedConvos objectAtIndex:0] isKindOfClass:[NSString class]] ) {
 		// no convo updates
-		NSMenuItem *newItem = [statusMenu insertItemWithTitle:@"No new convo messages" action:NULL keyEquivalent:@"" atIndex:0];
+		NSMenuItem *newItem = [statusMenu insertItemWithTitle:_noNewConvosMessage action:NULL keyEquivalent:@"" atIndex:0];
 		[newItem setEnabled:NO];
 	} else {
 		// real convo updates
@@ -138,7 +177,7 @@
 		return;
 	}
 	
-	//echowaves.responseData = [[NSMutableData data] retain];
+	echowaves.responseData = [[NSMutableData data] retain]; // FIXME: don't I already alloc/init this in Echowaves.m #init method
 	NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:echowaves.echowavesURI]];
 	[[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
@@ -151,27 +190,34 @@
 	if ( [responseString isEqualToString:@"\"Unable to find specified resource.\""] ) {
 		NSLog(@"Unable to find specified resource.\n");
 	} else {
-		NSBundle *bundle = [NSBundle mainBundle];
-		[echowaves.updatedConvos removeAllObjects];
+		[echowaves resetUpdatedConvos];
 		NSDictionary *dictionary = [responseString JSONValue];
 		if ( [dictionary count] ) {
-			//NSLog(@"returned dictionary data: %@", dictionary);
 			for (NSDictionary *subscription in dictionary ) {
 				UpdatedConvo *convo = [[UpdatedConvo alloc] initWithConvoName:[[subscription objectForKey:@"subscription"] objectForKey:@"convo_name"]
 																	 convoURI:[[subscription objectForKey:@"subscription"] objectForKey:@"conversation_id"]
 																  unreadCount:[[[subscription objectForKey:@"subscription"] objectForKey:@"new_messages_count"] integerValue]];
 				
 				
-				[echowaves.updatedConvos addObject:convo];
-				NSLog(@"Added convo: %@", convo);
-				[convo release];
+				NSLog(@"Adding convo: %@", convo);
+				[[echowaves updatedConvos] addObject:convo];
+				/*
+				 * FIXME: pretty sure there is a memory leak here since 
+				 * convo isn't being released.  However, when I do the next line
+				 * the app crashes on the 2nd time through getUpdates.
+				 */
+				//[convo release];
 			}
-			[statusItem setImage:[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"ewColor" ofType:@"png"]]];
+			[self updateStatusbarImage:@"ewColor"];
 		} else {
 			// * No new subscriptions
 			// * for now, just store the blank message
-			[echowaves.updatedConvos addObject:@"No new convo messages"];
-			[statusItem setImage:[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:@"ewBW" ofType:@"png"]]];
+//			NSString *noNewConvos = @"No new convo messages";
+//			[echowaves.updatedConvos addObject:noNewConvos];
+//			[noNewConvos release];
+			
+			[[echowaves updatedConvos] addObject:_noNewConvosMessage];
+			[self updateStatusbarImage:@"ewBW"];
 		}
 	}
 	[self reloadMenuItems];
@@ -188,7 +234,13 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 	NSLog(@"Connection failed: %@", [error description]);
 	[echowaves.updatedConvos removeAllObjects];
+	// TODO: will adding a 'Connection failure' message cause crashes elsewhere?? probably
 	[echowaves.updatedConvos addObject:@"Connection failure"];
+}
+
+- (void)updateStatusbarImage:(NSString *)imagePathName {
+	NSBundle *bundle = [NSBundle mainBundle];
+	[statusItem setImage:[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:imagePathName ofType:@"png"]]];
 }
 
 - (void)dealloc {

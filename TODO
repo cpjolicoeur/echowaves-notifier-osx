@@ -1,5 +1,20 @@
+* use KVO for noticing when api_key changes
+	* this means that api_key needs to be instance of Echowaves class
+	* not just a #define macro
+
 * set updates to run on timer
+
+* add submenu if more than 5 convos added to menu
+	* convo 1
+	* convo 2
+	* convo 3
+	* convo 4
+	* see more => 
+	
 * truncate convo names in the menu list
+
+* make Ctrl-V, Ctrl-X, Ctrl-C work in apiKey window
+
 * add growl support
 * add sparkle support for updating app
 * add preferences for setting update interval
