@@ -179,7 +179,6 @@
 }
 
 - (void)getUpdates {
-	NSLog(@"Inside getUpdates");
 	// NO OP if no API KEY set
 	if ( !_userApiKey ) {
 		NSLog(@"No _userApiKey set.  Aborting getUpdates process");

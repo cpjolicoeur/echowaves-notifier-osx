@@ -15,8 +15,8 @@
 
 - (id)initWithConvoName:(NSString *)convoName convoURI:(NSString *)convoURI unreadCount:(int)updatesCount; {
 	if ( self = [super init] ) {
-		ewURI = convoURI;
-		ewName = convoName;
+		ewURI = [[[NSString alloc] initWithString:convoURI] copy];
+		ewName = [[[NSString alloc] initWithString:convoName] copy];
 		newMessagesCount = updatesCount;
 	}
 	return self;
@@ -27,8 +27,8 @@
 }
 
 - (void)dealloc {
-	//[ewURI release];
-	//[ewName release];
+	[ewURI release];
+	[ewName release];
 	[super dealloc];
 }
 
