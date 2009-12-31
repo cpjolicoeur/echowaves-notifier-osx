@@ -5,19 +5,21 @@
       <link>http://craigjolicoeur.com/projects/echowaves-notifier/appcast.xml</link>
       <description>Most recent changes with links to updates.</description>
       <language>en</language>
+	     <!--
          <item>
             <title>Version 1.2 (1 bugs fixed; 1 new features)</title>
 						<sparkle:releaseNotesLink>
-							http://craigjolicoeur.com/projects/echowaves-notifier/changelog/1.2.html
+						http://craigjolicoeur.com/projects/echowaves-notifier/release-notes.html#version-1-2
 						</sparkle:releaseNotesLink>
             <pubDate>Fri, 01 Jan 2010 19:20:11 +0000</pubDate>
             <enclosure url="http://craigjolicoeur.com/projects/echowaves-notifier/releases/EchowavesNotifier_1.2.zip" sparkle:version="7" sparkle:shortVersionString="1.2" length="1623481" type="application/octet-stream" sparkle:dsaSignature="BAFJW4B6B1K1JyW30nbkBwainOzrN6EQuAh" />
          </item>
+		 -->
 
          <item>
             <title>Version 1.1b (2 bugs fixed; 1 new features)</title>
 						<sparkle:releaseNotesLink>
-							http://craigjolicoeur.com/projects/echowaves-notifier/changelog/1.1b.html
+							http://craigjolicoeur.com/projects/echowaves-notifier/release-notes.html#version-1-1b
 						</sparkle:releaseNotesLink>
             <pubDate>Thur, 31 Dec 2009 12:20:11 +0000</pubDate>
             <enclosure url="http://craigjolicoeur.com/projects/echowaves-notifier/releases/EchowavesNotifier_1.1b.zip" sparkle:version="5" sparkle:shortVersionString="1.1b" length="256797" type="application/octet-stream" sparkle:dsaSignature="MC0CFQCNLfBaoRYwjotahBPz+Gjk8SkpJQIUAXNXU/wwKsNETzCyoR1/WLJXlhY=" />
@@ -26,7 +28,7 @@
 		 <item>
            <title>Version 1.0b (initial release)</title>
 						<sparkle:releaseNotesLink>
-							http://craigjolicoeur.com/projects/echowaves-notifier/changelog/1.0b.html
+							http://craigjolicoeur.com/projects/echowaves-notifier/release-notes.html#version-1-0b
 						</sparkle:releaseNotesLink>
            <pubDate>Wed, 30 Dec 2009 12:20:11 +0000</pubDate>
            <enclosure url="http://craigjolicoeur.com/projects/echowaves-notifier/releases/EchowavesNotifier_1.0b.zip" sparkle:version="3" sparkle:shortVersionString="1.0b" sparkle:dsaSignature="MC0CFQCb/edTM8yoQ9vY2JxwfoAzMrcFHQIUGuh8NgdNBKbm7y9bug8HXHi3sXg=" length="191964" type="application/octet-stream" />
