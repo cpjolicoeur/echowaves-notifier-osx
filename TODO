@@ -1,3 +1,6 @@
+* when a convo is clicked via the menu (and subsequently opened in a browser)
+  remove it from the menu
+
 * add submenu if more than 5 convos added to menu
 	* convo 1
 	* convo 2
@@ -6,9 +9,6 @@
 	* see more => 
 	
 * make Ctrl-V, Ctrl-X, Ctrl-C work in apiKey window
-
-* when a convo is clicked via the menu (and subsequently opened in a browser)
-  remove it from the menu
 
 * add sparkle support for updating app
 
