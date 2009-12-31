@@ -5,16 +5,14 @@
       <link>http://craigjolicoeur.com/projects/echowaves-notifier/appcast.xml</link>
       <description>Most recent changes with links to updates.</description>
       <language>en</language>
-	     <!--
          <item>
-            <title>Version 1.2 (1 bugs fixed; 1 new features)</title>
+            <title>Version 1.2 (1 new feature)</title>
 						<sparkle:releaseNotesLink>
 						http://craigjolicoeur.com/projects/echowaves-notifier/release-notes.html#version-1-2
 						</sparkle:releaseNotesLink>
             <pubDate>Fri, 01 Jan 2010 19:20:11 +0000</pubDate>
-            <enclosure url="http://craigjolicoeur.com/projects/echowaves-notifier/releases/EchowavesNotifier_1.2.zip" sparkle:version="7" sparkle:shortVersionString="1.2" length="1623481" type="application/octet-stream" sparkle:dsaSignature="BAFJW4B6B1K1JyW30nbkBwainOzrN6EQuAh" />
+            <enclosure url="http://craigjolicoeur.com/projects/echowaves-notifier/releases/EchowavesNotifier_1.2.zip" sparkle:version="7" sparkle:shortVersionString="1.2" length="668131" type="application/octet-stream" sparkle:dsaSignature="MC0CFCl0EbVLHT4UylM2lU7r8EXHwKMlAhUAjVMfMUfLHIpMUoCBPb37BUlE7t4=" />
          </item>
-		 -->
 
          <item>
             <title>Version 1.1b (2 bugs fixed; 1 new features)</title>
