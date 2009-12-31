@@ -206,11 +206,6 @@
 				
 				NSLog(@"Adding convo: %@", convo);
 				[[echowaves updatedConvos] addObject:convo];
-				/*
-				 * FIXME: pretty sure there is a memory leak here since 
-				 * convo isn't being released.  However, when I do the next line
-				 * the app crashes on the 2nd time through getUpdates.
-				 */
 				[convo release];
 			}
 		}
