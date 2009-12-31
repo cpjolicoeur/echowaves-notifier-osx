@@ -215,7 +215,7 @@
 				 * convo isn't being released.  However, when I do the next line
 				 * the app crashes on the 2nd time through getUpdates.
 				 */
-				//[convo release];
+				[convo release];
 			}
 		} else {
 			// * No new subscriptions

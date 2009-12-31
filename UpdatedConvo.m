@@ -27,8 +27,8 @@
 }
 
 - (void)dealloc {
-	[ewURI release];
-	[ewName release];
+	//[ewURI release];
+	//[ewName release];
 	[super dealloc];
 }
 
