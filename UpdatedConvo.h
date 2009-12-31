@@ -16,8 +16,8 @@
 }
 
 @property int newMessagesCount;
-@property (nonatomic, retain) NSString *ewURI;
-@property (nonatomic, retain) NSString *ewName;
+@property (nonatomic, copy) NSString *ewURI;
+@property (nonatomic, copy) NSString *ewName;
 
 - (id)initWithConvoName:(NSString *)convoName convoURI:(NSString *)convoURI unreadCount:(int)updatesCount;
 
