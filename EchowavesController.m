@@ -6,13 +6,6 @@
 //  Copyright 2009 Dr J Enterprises, LLC. All rights reserved.
 //
 
-/*
- *
- * http://www.sonsothunder.com/devres/revolution/tutorials/StatusMenu.html
- * http://www.musicalgeometry.com/archives/571
- *
- */
-
 #import "EchowavesController.h"
 #import "JSON.h"
 #import "Echowaves.h"
