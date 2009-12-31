@@ -10,9 +10,13 @@
 	
 * make Ctrl-V, Ctrl-X, Ctrl-C work in apiKey window
 
-* add sparkle support for updating app
-
 * add preferences for setting update interval
 
 * only send Growl alert if there are true *new* convo updates
 	* if the updatedConvos are the same as the old ones, dont notify via Growl again
+
+* update sparkle preferences
+	* allow automatic checking
+	* allow user-defined update check interval
+	* collect system stats
+	* http://sparkle.andymatuschak.org/documentation/pmwiki.php/Documentation/BasicSetup?from=Main.HomePage (see "Next steps" section)
