@@ -76,14 +76,12 @@
 		[echowaves setEchowavesURI:_userApiKey];
 		[self getUpdates];
 		// TODO: set timer for next update
-		//[growl growlAlert:@"API Key found" title:@"GROWL TEST"];
 	} else {
 		// no user API Key set in the defaults yet
 		NSLog(@"No _userApiKey set");
 		[self enableManualUpdateMenuItem:NO];
 		[apiWindow showWindow:self];
 		// TODO: disable timer
-		//[growl growlAlert:@"API Key NOT found" title:@"GROWL TEST"];
 	}
 	
 	// add KVO observer for userApiKey
@@ -127,7 +125,6 @@
 
 - (void)resetUpdatedConvos {
 	[echowaves resetUpdatedConvos];
-	[echowaves.updatedConvos addObject:_noNewConvosMessage];
 	[self reloadMenuItems];
 	[self updateStatusbarImage:@"ewBW"];
 }
@@ -156,13 +153,14 @@
 		[statusMenu removeItem:item];
 	}
 
-	if ( ([echowaves.updatedConvos count] == 0 ) || [[echowaves.updatedConvos objectAtIndex:0] isKindOfClass:[NSString class]] ) {
+	if ( ([echowaves.updatedConvos count] == 0 ) ) {
 		// no convo updates
 		NSMenuItem *newItem = [statusMenu insertItemWithTitle:_noNewConvosMessage action:NULL keyEquivalent:@"" atIndex:0];
 		[newItem setEnabled:NO];
 		[self updateStatusbarImage:@"ewBW" withCount:0];
 	} else {
 		// real convo updates
+		[growl growlAlert:[NSString stringWithFormat:@"%d new updated convos", [[echowaves updatedConvos] count]] title:@"Echowaves Notifier"];
 		for (UpdatedConvo *convo in echowaves.updatedConvos) {
 			// TODO: need to truncate convo name string if it is longer than 25? chars
 			NSMenuItem *newItem = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%d - %@", convo.newMessagesCount, convo.ewName] action:@selector(convoSelected:) keyEquivalent:@"" atIndex:0];
@@ -222,14 +220,6 @@
 				 */
 				[convo release];
 			}
-		} else {
-			// * No new subscriptions
-			// * for now, just store the blank message
-//			NSString *noNewConvos = @"No new convo messages";
-//			[echowaves.updatedConvos addObject:noNewConvos];
-//			[noNewConvos release];
-			
-			[[echowaves updatedConvos] addObject:_noNewConvosMessage];
 		}
 	}
 	[self reloadMenuItems];

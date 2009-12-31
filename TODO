@@ -1,5 +1,3 @@
-* clean up (potential) memory leak with added convos to updatedConvos
-
 * add submenu if more than 5 convos added to menu
 	* convo 1
 	* convo 2
@@ -14,6 +12,5 @@
 * when a convo is clicked via the menu (and subsequently opened in a browser)
   remove it from the menu
 
-* add growl support
 * add sparkle support for updating app
 * add preferences for setting update interval
