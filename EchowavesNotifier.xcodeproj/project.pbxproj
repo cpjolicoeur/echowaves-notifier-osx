@@ -13,7 +13,8 @@
 		5267380410E95849005E133C /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 5267380310E95849005E133C /* TODO */; };
 		52673B2C10EBE391005E133C /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 52673B2B10EBE391005E133C /* icon.icns */; };
 		52673B4F10EC02EE005E133C /* GrowlNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 52673B4E10EC02EE005E133C /* GrowlNotifier.m */; };
-		52673B5110EC05B2005E133C /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52673B5010EC05B2005E133C /* Growl.framework */; };
+		52673C3310ED026B005E133C /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52673C3210ED026B005E133C /* Growl.framework */; };
+		52673C4510ED0739005E133C /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 52673C3210ED026B005E133C /* Growl.framework */; };
 		52783FDB10E6ED030004235A /* EchowavesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52783FDA10E6ED030004235A /* EchowavesController.m */; };
 		52783FDE10E6F65E0004235A /* ewHL.png in Resources */ = {isa = PBXBuildFile; fileRef = 52783FDC10E6F65E0004235A /* ewHL.png */; };
 		52783FDF10E6F65E0004235A /* ewBW.png in Resources */ = {isa = PBXBuildFile; fileRef = 52783FDD10E6F65E0004235A /* ewBW.png */; };
@@ -32,12 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		52673B7810EC060D005E133C /* CopyFiles */ = {
+		52673C3B10ED02D7005E133C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "src/echowaves-notifier-osx/Growl.framework";
+			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				52673C4510ED0739005E133C /* Growl.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +61,7 @@
 		52673B2B10EBE391005E133C /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = "/Users/cpjolicoeur/Downloads/Echowaves Logos/icon.icns"; sourceTree = "<absolute>"; };
 		52673B4D10EC02EE005E133C /* GrowlNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrowlNotifier.h; sourceTree = "<group>"; };
 		52673B4E10EC02EE005E133C /* GrowlNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GrowlNotifier.m; sourceTree = "<group>"; };
-		52673B5010EC05B2005E133C /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
+		52673C3210ED026B005E133C /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		52783FD910E6ED030004235A /* EchowavesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EchowavesController.h; sourceTree = "<group>"; };
 		52783FDA10E6ED030004235A /* EchowavesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EchowavesController.m; sourceTree = "<group>"; };
 		52783FDC10E6F65E0004235A /* ewHL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ewHL.png; sourceTree = "<group>"; };
@@ -92,7 +94,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
-				52673B5110EC05B2005E133C /* Growl.framework in Frameworks */,
+				52673C3310ED026B005E133C /* Growl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +182,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				52673B5010EC05B2005E133C /* Growl.framework */,
+				52673C3210ED026B005E133C /* Growl.framework */,
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
@@ -228,7 +230,7 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
-				52673B7810EC060D005E133C /* CopyFiles */,
+				52673C3B10ED02D7005E133C /* CopyFiles */,
 			);
 			buildRules = (
 			);
