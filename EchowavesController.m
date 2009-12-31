@@ -76,12 +76,14 @@
 		[echowaves setEchowavesURI:_userApiKey];
 		[self getUpdates];
 		// TODO: set timer for next update
+		//[growl growlAlert:@"API Key found" title:@"GROWL TEST"];
 	} else {
 		// no user API Key set in the defaults yet
 		NSLog(@"No _userApiKey set");
 		[self enableManualUpdateMenuItem:NO];
 		[apiWindow showWindow:self];
 		// TODO: disable timer
+		//[growl growlAlert:@"API Key NOT found" title:@"GROWL TEST"];
 	}
 	
 	// add KVO observer for userApiKey
