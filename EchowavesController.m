@@ -251,14 +251,12 @@
 }
 
 - (void)updateStatusbarImage:(NSString *)imagePathName withCount:(int)count {
-	NSBundle *bundle = [NSBundle mainBundle];
-	[statusItem setImage:[[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:imagePathName ofType:@"png"]]];
-	
 	if (count == 0) {
 		[statusItem setTitle:@""];
 	} else {
 		[statusItem setTitle:[NSString stringWithFormat:@"%d", count]];
 	}
+	[self updateStatusbarImage:imagePathName];
 }
 
 - (void)dealloc {
