@@ -15,10 +15,6 @@
 
 - (id)init {
 	if ( self = [super init] ) {
-//		updatedConvos = [[NSMutableArray array] retain];
-//		responseData = [[NSMutableData data] retain];
-//		updatedConvos = [NSMutableArray array];
-//		responseData = [NSMutableData data];
 		updatedConvos = [[NSMutableArray alloc] initWithCapacity:0];
 		responseData = [[NSMutableData alloc] initWithCapacity:0];
 	}
@@ -43,8 +39,6 @@
 
 - (void)resetUpdatedConvos {
 	[updatedConvos removeAllObjects];
-	//updatedConvos = [NSMutableArray array];
-	//updatedConvos = nil;
 }
 
 @end
