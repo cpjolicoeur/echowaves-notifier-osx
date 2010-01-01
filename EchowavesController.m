@@ -155,8 +155,7 @@
 		// real convo updates
 		[growl growlAlert:[NSString stringWithFormat:@"%d new updated convos", [[echowaves updatedConvos] count]] title:@"Echowaves Notifier"];
 		for (UpdatedConvo *convo in echowaves.updatedConvos) {
-			// TODO: need to truncate convo name string if it is longer than 25? chars
-			NSMenuItem *newItem = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%d - %@", convo.newMessagesCount, convo.ewName] action:@selector(convoSelected:) keyEquivalent:@"" atIndex:0];
+			NSMenuItem *newItem = [statusMenu insertItemWithTitle:[NSString stringWithFormat:@"%d - %@", convo.newMessagesCount, [convo truncatedName:_menuTextTruncationSize]] action:@selector(convoSelected:) keyEquivalent:@"" atIndex:0];
 			[newItem setTarget:self];
 			[newItem setRepresentedObject:convo.ewURI];
 		}

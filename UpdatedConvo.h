@@ -20,5 +20,6 @@
 @property (nonatomic, copy) NSString *ewName;
 
 - (id)initWithConvoName:(NSString *)convoName convoURI:(NSString *)convoURI unreadCount:(int)updatesCount;
+- (NSString *)truncatedName:(int)size;
 
 @end

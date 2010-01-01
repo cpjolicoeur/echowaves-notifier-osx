@@ -26,6 +26,16 @@
 	return [NSString stringWithFormat:@"Convo: %@, URL: %@, messages count: %d", ewName, ewURI, newMessagesCount];
 }
 
+- (NSString *)truncatedName:(int)size {
+	// return the ewName field truncated to 'size'
+	if ( [ewName length] > size ) {
+		return [[ewName substringToIndex:size] stringByAppendingString:@"..."];
+	} else {
+		return [ewName autorelease];
+	}
+
+}
+
 - (void)dealloc {
 	[ewURI release];
 	[ewName release];

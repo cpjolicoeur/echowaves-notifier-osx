@@ -14,6 +14,7 @@
 #define _convoBaseURI @"http://echowaves.com/conversations/"
 #define _updateInterval 300
 #define _noNewConvosMessage @"No new convo messages"
+#define _menuTextTruncationSize 40
 
 @class ApiKeyController;
 

@@ -5,12 +5,14 @@
 	* convo 4
 	* see more => 
 	
-* truncate convo names in the menu list
-
 * make Ctrl-V, Ctrl-X, Ctrl-C work in apiKey window
 
 * when a convo is clicked via the menu (and subsequently opened in a browser)
   remove it from the menu
 
 * add sparkle support for updating app
+
 * add preferences for setting update interval
+
+* only send Growl alert if there are true *new* convo updates
+	* if the updatedConvos are the same as the old ones, dont notify via Growl again
